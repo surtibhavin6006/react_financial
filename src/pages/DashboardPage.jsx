@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {getDashboard} from "../modules/transactionSlice.js";
+import {getDashboard} from "../stores/transactionSlice.js";
 import DashboardCartListComponent from "../components/Dashboard/DashboardCartListComponent.jsx";
 import DashboardLoaderComponent from "../components/Dashboard/DashboardLoaderComponent.jsx";
 

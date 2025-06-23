@@ -3,7 +3,7 @@ import {useEffect} from "react";
 import {Navigate} from "react-router-dom";
 import {ROUTES} from "../router.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import {getAuth} from "../modules/authSlice.js";
+import {getAuth} from "../stores/authSlice.js";
 
 const LoginPage = () => {
 

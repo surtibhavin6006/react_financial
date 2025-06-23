@@ -5,7 +5,7 @@ import BudgetListComponent from "../components/Budget/BudgetListComponent.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import BudgetBlockLoaderComponent from "../components/Budget/BudgetBlockLoaderComponent.jsx";
 import BudgetModelPopup from "../components/Budget/BudgetModelPopup.jsx";
-import {resetBudgetForm} from "../modules/budgetSlice.js";
+import {resetBudgetForm} from "../stores/budgetSlice.js";
 const BudgetPage = () => {
 
     const dispatch = useDispatch();

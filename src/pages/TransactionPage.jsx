@@ -4,8 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {FaPlus} from "react-icons/fa";
 import TransactionModelPopup from "../components/Transaction/TransactionModelPopup.jsx";
 import TransactionBlockLoaderComponent from "../components/Transaction/TransactionBlockLoaderComponent.jsx";
-import {getTransaction, resetTransactionForm} from "../modules/transactionSlice.js";
-import {resetBudgetForm} from "../modules/budgetSlice.js";
+import {getTransaction, resetTransactionForm} from "../stores/transactionSlice.js";
 
 const TransactionPage = () => {
 

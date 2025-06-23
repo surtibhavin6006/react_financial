@@ -1,6 +1,6 @@
 import DynamicFormComponent from "./DynamicFormComponent.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import {signup} from "../modules/authSlice.js";
+import {signup} from "../stores/authSlice.js";
 import {singUpFormFields} from "../constant/forms/signupFormFIelds.js";
 import {NavLink, useNavigate} from "react-router-dom";
 import {useEffect} from "react";

@@ -1,7 +1,7 @@
 import {budgetFormFields} from "../../constant/forms/budgetFormFields.js";
 import DynamicFormComponent from "../DynamicFormComponent.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import {createBudget, updateBudget} from "../../modules/budgetSlice.js";
+import {createBudget, updateBudget} from "../../stores/budgetSlice.js";
 
 const BudgetFormComponent = () => {
 

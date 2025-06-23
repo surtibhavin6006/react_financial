@@ -2,7 +2,7 @@ import ModalPopup from "../ModalPopup.jsx";
 import BudgetFormComponent from "./BudgetFormComponent.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import {resetBudgetForm} from "../../modules/budgetSlice.js";
+import {resetBudgetForm} from "../../stores/budgetSlice.js";
 
 const BudgetModelPopup = ({ isModalOpen = false, onClose }) => {
 

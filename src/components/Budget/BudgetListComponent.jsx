@@ -1,6 +1,6 @@
 import {FaPen} from "react-icons/fa";
 import {useDispatch} from "react-redux";
-import {editBudgetItem} from "../../modules/budgetSlice.js";
+import {editBudgetItem} from "../../stores/budgetSlice.js";
 
 const BudgetListComponent = ({ budgets }) => {
 

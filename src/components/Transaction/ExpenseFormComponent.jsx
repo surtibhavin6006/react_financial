@@ -2,7 +2,7 @@ import DynamicFormComponent from "../DynamicFormComponent.jsx";
 import {expenseFormFields} from "../../constant/forms/expenseFormFields.js";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import {createTransaction} from "../../modules/transactionSlice.js";
+import {createTransaction} from "../../stores/transactionSlice.js";
 
 const ExpenseFormComponent = () => {
 

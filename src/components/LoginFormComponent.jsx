@@ -1,7 +1,7 @@
 import DynamicFormComponent from "./DynamicFormComponent.jsx";
 import {loginFormFields} from "../constant/forms/loginFormFields.js";
 import {useDispatch, useSelector} from "react-redux";
-import {login} from "../modules/authSlice.js";
+import {login} from "../stores/authSlice.js";
 import {NavLink} from "react-router-dom";
 
 const LoginFormComponent = () => {

@@ -4,7 +4,7 @@ import useToggleComponent from "../../hooks/toggleComponentHook.js";
 import IncomeFormComponent from "./IncomeFormComponent.jsx";
 import ExpenseFormComponent from "./ExpenseFormComponent.jsx";
 import {useDispatch} from "react-redux";
-import {resetTransactionForm} from "../../modules/transactionSlice.js";
+import {resetTransactionForm} from "../../stores/transactionSlice.js";
 
 const TransactionModelPopup = ({ isModalOpen, onClose }) => {
 

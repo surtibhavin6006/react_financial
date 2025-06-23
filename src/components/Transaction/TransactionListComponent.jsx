@@ -1,5 +1,5 @@
 import {useDispatch} from "react-redux";
-import {deleteTransaction} from "../../modules/transactionSlice.js";
+import {deleteTransaction} from "../../stores/transactionSlice.js";
 import {NavLink} from "react-router-dom";
 import NoRecordFoundInfoComponent from "../NoRecordFoundInfoComponent.jsx";
 import PriceFormatComponent from "../PriceFormatComponent.jsx";

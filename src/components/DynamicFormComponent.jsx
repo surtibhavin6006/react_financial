@@ -1,11 +1,11 @@
 import {useEffect, useState} from "react";
 import {isInteger, maxLength, minLength, validateEmail, validateMatch} from "../helpers/common.js";
-import {resetTransactionForm} from "../modules/transactionSlice.js";
-import {useDispatch} from "react-redux";
 
 const DynamicFormComponent = ({ formFields, onSubmit, onCancel, serverError, isFormSubmitted, setting, resetForm = false, updateData=false }) => {
 
-    const dispatch = useDispatch();
+    if(Object.keys(formFields).length === 0){
+        return null;
+    }
 
     const defaultSetting = {
         submitButton: {
@@ -19,6 +19,7 @@ const DynamicFormComponent = ({ formFields, onSubmit, onCancel, serverError, isF
 
     const finalSetting = {...defaultSetting, ... setting};
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         if((!isFormSubmitted && serverError === false) || updateData) {
             setFormData(prev =>
@@ -38,6 +39,7 @@ const DynamicFormComponent = ({ formFields, onSubmit, onCancel, serverError, isF
         }
     }, [updateData, isFormSubmitted, serverError, resetForm]);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [formData, setFormData] = useState(() =>
         Object.fromEntries(formFields.map((field) => [field.name, {
             errorMsg: '',
@@ -47,11 +49,32 @@ const DynamicFormComponent = ({ formFields, onSubmit, onCancel, serverError, isF
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        const errMsg = getValidationMessage(name, value);
-        setFormData((prev) => ({ ...prev, [name]: {
-                value: value,
-                errorMsg: errMsg
-        }}));
+
+        setFormData((prevData) => {
+            const updated = {
+                ...prevData,
+                [name]: {
+                    ...prevData[name],
+                    value,
+                    errorMsg: '' // clear error when typing
+                }
+            };
+
+            // Custom validation example: password match
+            if (
+                (name === 'password' || name === 'password_confirmation') &&
+                updated['password']?.value &&
+                updated['password_confirmation']?.value
+            ) {
+                updated['password'].errorMsg = getValidationMessage(name, value);
+                updated['password_confirmation'].errorMsg = getValidationMessage(name, value);
+            } else {
+                updated[name].errorMsg = getValidationMessage(name, value);
+            }
+
+            return updated;
+        });
+
     };
 
     const getValidationMessage = (name, value) => {
@@ -92,13 +115,25 @@ const DynamicFormComponent = ({ formFields, onSubmit, onCancel, serverError, isF
             if(value && email && validateEmail(value,min)) {
                 finalMessage = formFieldsTmp.label + ' must be proper email address';
             }
-            if(value && matchField && validateMatch(value,formData[matchField].value)) {
+
+            if(value && matchField) {
+                let formMatchedField = [...formFields];
+                formMatchedField = formMatchedField.filter((field) => {
+                    return field.name === matchField
+                });
+
+                if(validateMatch(value,formData[matchField].value)){
+                    finalMessage = formFieldsTmp.label + ' must be matched with ' + formMatchedField[0].label;
+                }
+            }
+
+            /*if(value && matchField && validateMatch(value,formData[matchField].value)) {
                 let formFieldsTemp = [...formFields];
                 formFieldsTemp = formFieldsTemp.filter((field) => {
                     return field.name === matchField
                 });
                 finalMessage = formFieldsTmp.label + ' must be matched with ' + formFieldsTemp[0].label;
-            }
+            } else if(validateMatch(value,formData[matchField].value))*/
         }
         return finalMessage;
     }
@@ -159,7 +194,6 @@ const DynamicFormComponent = ({ formFields, onSubmit, onCancel, serverError, isF
 
     const handleCancel = (e) => {
         e.preventDefault();
-        dispatch(resetTransactionForm());
         onCancel();
     };
 
