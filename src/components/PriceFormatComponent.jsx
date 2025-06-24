@@ -1,11 +1,7 @@
-const PriceFormatComponent = ({ amount }) => {
-    const formatted = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'INR',
-        minimumFractionDigits: 2,
-    }).format(amount);
+import {formatCurrency} from "../helpers/common.js";
 
-    return <span>{formatted}</span>;
+const PriceFormatComponent = ({ amount }) => {
+    return <span>{formatCurrency(amount)}</span>;
 };
 
 export default PriceFormatComponent;

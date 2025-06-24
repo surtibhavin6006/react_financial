@@ -189,6 +189,25 @@ const transactionSlice = createSlice({
                     error: false,
                     data: action.payload.data
                 }
+
+                const  incomeDashboardOverview = [... state.dashboard.data.totalIncomeOverview];
+                state.dashboard.data.incomeDashboardOverview = incomeDashboardOverview.map((incDash) => {
+                    return {
+                        amount: incDash.amount,
+                        name: incDash.income.name,
+                        declaredAmt: null,
+                    }
+                });
+
+                const expenseDashboardOverview = [... state.dashboard.data.totalExpenseOverview];
+                state.dashboard.data.expenseDashboardOverview = expenseDashboardOverview.map((incDash) => {
+                    return {
+                        amount: incDash.amount,
+                        name: incDash.budget.name,
+                        declaredAmt: incDash.budget.amount
+                    }
+                })
+
             })
             .addCase(getDashboard.rejected, (state, action) => {
                 state.dashboard = {

@@ -1,5 +1,6 @@
 const DashboardLoaderComponent = ({showLoaderOrNot}) => {
 
+    console.log('DashboardLoaderComponent',showLoaderOrNot);
     if(showLoaderOrNot === null) {
         return (
             <div
@@ -19,7 +20,7 @@ const DashboardLoaderComponent = ({showLoaderOrNot}) => {
 
     if(showLoaderOrNot === false) {
         return (
-            <div>
+            <div className="no-data-found">
                     No Data Found
             </div>
         )

@@ -48,3 +48,11 @@ export const deleteCookie = (name) => {
         document.cookie = `${name}=; max-age=0; path=/`;
     }
 };
+
+export const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'INR',
+        minimumFractionDigits: 2,
+    }).format(amount);
+}

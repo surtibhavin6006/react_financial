@@ -86,11 +86,7 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setAuth: (state, isAuthenticated = false) => {
-            applyAuth(state,isAuthenticated)
-        },
         getAuth: (state) => {
-            console.log(state);
             const isAuthenticated = getCookie('isAuthenticated');
             state.isAuthenticated = isAuthenticated === 'true';
         },
@@ -102,10 +98,11 @@ const authSlice = createSlice({
                 state.error = false;
                 state.isAuthenticated = false;
             })
-            .addCase(login.fulfilled, (state) => {
+            .addCase(login.fulfilled, (state,action) => {
                 state.isSubmitted = false;
                 state.error = false;
-                applyAuth(state,true);
+                let expiresInSec = action.payload.data.expires_in * 60;
+                applyAuth(state, true, expiresInSec);
             })
             .addCase(login.rejected, (state, action) => {
                 applyAuth(state,false)
