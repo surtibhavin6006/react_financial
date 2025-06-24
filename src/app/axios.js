@@ -1,7 +1,9 @@
 import axios from 'axios';
+import {deleteCookie, getCookie} from "../helpers/common.js";
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8000/api/', // Replace with your backend URL
+    //baseURL: 'http://localhost:8000/api/', // Replace with your backend URL
+    baseURL: import.meta.env.VITE_API_BASE_URL,
     headers: {
         'Content-Type': 'application/json',
     },
@@ -24,6 +26,7 @@ axiosInstance.interceptors.response.use(
         } else {
             switch (response.status) {
                 case 401:
+                    deleteCookie('isAuthenticated');
                     console.warn("Unauthorized. Redirecting to login.");
                     if (
                         !requestUrl.includes('auth/login') &&

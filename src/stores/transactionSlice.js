@@ -195,16 +195,17 @@ const transactionSlice = createSlice({
                     return {
                         amount: incDash.amount,
                         name: incDash.income.name,
-                        declaredAmt: null,
+                        id: incDash.income_category_id
                     }
                 });
 
                 const expenseDashboardOverview = [... state.dashboard.data.totalExpenseOverview];
-                state.dashboard.data.expenseDashboardOverview = expenseDashboardOverview.map((incDash) => {
+                state.dashboard.data.expenseDashboardOverview = expenseDashboardOverview.map((expDash) => {
                     return {
-                        amount: incDash.amount,
-                        name: incDash.budget.name,
-                        declaredAmt: incDash.budget.amount
+                        amount: expDash.amount,
+                        name: expDash.budget.name,
+                        declaredAmt: expDash.budget.amount,
+                        id: expDash.budget_id
                     }
                 })
 
